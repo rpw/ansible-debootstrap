@@ -16,8 +16,8 @@
 # @TODO: assumes a host system without RAID, better to determine the next free md device programmatically
 # Ubuntu has the habit of renaming devices with a raid name to md127, md126 etc.
 - name: create MD devices
-  command: >
-    mdadm --create /dev/md{{ 127 - device_num }} --level {{ device.level }} --raid-devices {{ device.members|count }}
+  shell: >
+    yes | mdadm --create /dev/md{{ 127 - device_num }} --level {{ device.level }} --raid-devices {{ device.members|count }}
     {% if device.level != 0 %}--bitmap=internal{% endif %} --name {{ device.name }} --metadata 1.2
     {% if 'chunk_size' in device %}--chunk {{ device.chunk_size }}{% endif %} {{ device.members|join(" ") }}
   loop_control:
