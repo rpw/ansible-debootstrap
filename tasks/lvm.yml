@@ -23,7 +23,7 @@
     index_var: volume_num
   loop: "{{ lvm }}"
 
-- name: create LVM columes
+- name: create LVM volumes
   lvol:
     active: "{{ volume.lvm.active|default(omit) }}"
     force: "{{ volume.lvm.force|default(omit) }}"
